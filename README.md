@@ -21,13 +21,13 @@ Algorithms.
 
 Learning Objectives
 
-This project helps you understand:
+This project helps to understand:
 
 -   Priority queues
 -   Heap operations
 -   Greedy scheduling
 -   Dictionary usage
--   Console application design
+-   Data Structures and Algorithms
 
 ------------------------------------------------------------------------
 
@@ -76,7 +76,7 @@ Always selects the highest priority task first.
 
 Project Structure
 
-task_scheduler/ │ ├── scheduler.py ├── README.md
+[empty]
 
 ------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ User Interface
 
 1.  Add Task
 2.  View Next Task
-3.  Execute Task
+3.  Run Tasks
 4.  Display All Tasks
 5.  Change Task Priority
 6.  Exit
@@ -97,9 +97,9 @@ Functions Required
 
 add_task()
 view_next_task()
-execute_task()
+run_tasks()
 display_tasks()
-change_priority()
+change_task_priority()
 show_menu()
 main()
 
@@ -112,6 +112,8 @@ Empty scheduler → “No tasks available”
 Task not found → “Task does not exist”
 
 Duplicate task → “Task already exists”
+
+Duplicate priority → Run based on last added
 
 ------------------------------------------------------------------------
 
