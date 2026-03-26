@@ -1,95 +1,44 @@
-# task_scheduler
-A Python Data Structures Project. Schedules tasks based on priority
+# Task Scheduler
 
-Project Overview
+A Python GUI application with flask that schedules and executes tasks based on priority.
 
-The Task Scheduler is a python GUI application that executes and
-schedules tasks based on their priority.
-Tasks are added and the **Estimated Time of Completion (ETC)** is
-calculated based on the text "length" or text "count".
+---
 
-How it works (overview):
--   User adds a task and sets the priority
--   Higher-priority tasks are executed first
--   Tasks with equal priority follow the order they were added
--   Application shows the ETC for each task
+## Features
 
-------------------------------------------------------------------------
+- **Add a task** — Enter a task name and assign it a priority
+- **Delete a task** — Remove a task; the next task in line inherits its priority
+- **Run tasks** — Reorders and executes all tasks from highest to lowest priority
+- **Interrupt** — Stops all running tasks at any point
 
-Features
+---
 
-Tasks List
-   
-Add a task
-   --> Task, Priority
-   
-Delete a task
-   --> Recycle bin
-   --> * Next priority takes the priority of deleted task in succession
-   
-Run tasks
-   --> Reorders tasks on priority
-   --> Executes tasks one by one based on priority
-   --> Sidebar opens to show finished tasks
+## Requirements
 
-Interrupt
-   --> Stops all taks from running
+- Python 3
+- Flask
 
-...
+## How to Run
+1. Download python <https://www.python.org/downloads/>
 
-------------------------------------------------------------------------
+2. Clone the repository
+```
+git clone https://github.com/betsekpoe/task_scheduler.git
+```
+3. Install flask
+```
+pip install flask
+```
+4. Run the main application file
+```
+python app.py
+```
 
-Data Structures Used
+---
 
-Priority Queue (Heap)
+## Usage
 
-Used to access highest priority task efficiently.
-
-Time Complexity:
-
-Insert: O(log n)
-Remove: O(log n)
-View: O(1)
-
-------------------------------------------------------------------------
-
-Dictionary
-
-Used for fast lookup of tasks.
-
-Example:
-
-tasks = { “Study”: 5, “Sleep”: 2 }
-
-------------------------------------------------------------------------
-
-Algorithm Used
-
-Greedy Scheduling Algorithm
-
-Always selects the highest priority task first.
-
-------------------------------------------------------------------------
-
-Project Structure
-
-[empty]
-
-------------------------------------------------------------------------
-
-Functions Required
-
-[empty]
-
-------------------------------------------------------------------------
-
-Error Handling
-
-[empty]
-
-------------------------------------------------------------------------
-
-How to Run
-
-[empty]
-
+1. Open the app
+2. Add a task by entering a name and a priority number
+3. Click **Execute All Tasks** to execute tasks in priority order
+4. Click **Interrupt** to stop execution at any time
