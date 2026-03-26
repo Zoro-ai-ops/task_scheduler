@@ -42,3 +42,6 @@ python app.py
 2. Add a task by entering a name and a priority number
 3. Click **Execute All Tasks** to execute tasks in priority order
 4. Click **Interrupt** to stop execution at any time
+
+
+[About this project](ABOUT.md)
