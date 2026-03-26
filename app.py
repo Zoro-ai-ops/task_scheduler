@@ -1,19 +1,22 @@
-import heapq # built in module for heap operations
+import heapq
+from flask import Flask, render_template, request, redirect
 
+app = Flask(__name__)
+
+# ===== YOUR ORIGINAL CODE (UNCHANGED) =====
 class TaskScheduler:
     def __init__(self):
         self.heap = []
         self.task_map = {}
-        self.counter = 0 #A tie breaker for tasks with the same proiority
+        self.counter = 0
 
     def add_task(self, task_id, priority):
         self.counter += 1
-        # Create entry with negative priority (max heap), counter, and task_id
         entry = (-priority, self.counter, task_id)
         heapq.heappush(self.heap, entry)
-        self.task_map[task_id] = entry # Store mapping of task_id to entry for removal tracking
+        self.task_map[task_id] = entry
 
-    def peek_task(self):#retrum max value or in this case the value with th highest priority
+    def peek_task(self):
         while self.heap:
             priority, _, task_id = self.heap[0]
             if task_id in self.task_map:
@@ -30,23 +33,39 @@ class TaskScheduler:
         return None
 
     def change_priority(self, task_id, new_priority):
-        # Change priority by removing old entry and adding new one
         if task_id in self.task_map:
             del self.task_map[task_id]
             self.add_task(task_id, new_priority)
 
     def get_all_tasks(self):
-        # Return list of all valid tasks with their priorities
         return [(task_id, -entry[0]) for task_id, entry in self.task_map.items()]
- 
- #TEST
-Sched = TaskScheduler()
-Sched.add_task("Task1", 5)
-Sched.add_task("Task2", 10)
-Sched.add_task("Task3",6)
 
-print(Sched.peek_task())
+scheduler = TaskScheduler()
 
-Sched.change_priority("Task1", 12)
-print(Sched.peek_task())
+@app.route("/")
+def home():
+    tasks = scheduler.get_all_tasks()
+    next_task = scheduler.peek_task()
+    return render_template("index.html", tasks=tasks, next_task=next_task)
 
+@app.route("/add", methods=["POST"])
+def add():
+    task = request.form["task"]
+    priority = int(request.form["priority"])
+    scheduler.add_task(task, priority)
+    return redirect("/")
+
+@app.route("/execute")
+def execute():
+    scheduler.execute_task()
+    return redirect("/")
+
+@app.route("/change", methods=["POST"])
+def change():
+    task = request.form["task"]
+    priority = int(request.form["priority"])
+    scheduler.change_priority(task, priority)
+    return redirect("/")
+
+if __name__ == "__main__":
+    app.run(debug=True)
