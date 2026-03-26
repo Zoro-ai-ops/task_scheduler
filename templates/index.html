@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Scheduler</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>🚀 Task Scheduler</h2>
+
+<h3>Add Task</h3>
+<form action="/add" method="post">
+    Task: <input type="text" name="task">
+    Priority: <input type="number" name="priority">
+    <button type="submit">Add Task</button>
+</form>
+
+<h3>Change Priority</h3>
+<form action="/change" method="post">
+    Task: <input type="text" name="task">
+    New Priority: <input type="number" name="priority">
+    <button type="submit">Update Priority</button>
+</form>
+
+<h3>🔥 Next Task</h3>
+<p>
+    {% if next_task %}
+        <b>{{ next_task[0] }}</b> (Priority {{ next_task[1] }})
+    {% else %}
+        No task available
+    {% endif %}
+</p>
+
+<h3>📋 All Tasks</h3>
+<ul>
+    {% for t in tasks %}
+        <li>{{ t[0] }} (Priority {{ t[1] }})</li>
+    {% endfor %}
+</ul>
+
+<a href="/execute" class="execute">Execute Top Task</a>
+
+</div>
+
+</body>
+</html>
