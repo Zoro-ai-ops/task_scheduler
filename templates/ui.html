@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='ui_style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='execution_sidebar.css') }}" />
   </head>
-  <body>
     <div class="app-layout">
       <main class="container">
         <header class="header">
@@ -17,15 +16,15 @@
         <section class="card">
           <h2>Add Task</h2>
           <form class="grid-form" action="/add" method="post">
-            <label>Task Name<input type="text" name="task_name" placeholder="e.g., Send report" required/></label>
+            <label>Task Name<input type="text" name="task_name" placeholder="e.g., Send report" /></label>
 
-            <label>Priority<input type="number" name="priority" min="1" placeholder="1" required/></label>
+            <label>Priority<input type="number" name="priority" min="1" placeholder="1" /></label>
 
             <button type="submit">Add Task</button>
           </form>
-          {% comment %} {% if error_message %}
+          {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
-          {% endif %} {% endcomment %}
+          {% endif %}
         </section>
 
         <section class="card">
@@ -44,7 +43,7 @@
               </p>
             </div>
           {% else %}
-            <p class="empty-task">No tasks added yet. Add a task to view next task in queue.</p>
+            <p>No tasks added yet. Add a task to view next task in que</p>
           {% endif %}
         </section>
 
@@ -83,14 +82,13 @@
               </tbody>
             </table>
           {% else %}
-            <p class="empty-task">No tasks added yet. Add a task to execute.</p>
+            <p>No tasks added yet. Add a task to execute</p>
           {% endif %}
         </section>
 
         <section class="card update-priority-section">
           <h2>Change Task Priority</h2>
           <form class="grid-form" action="/change" method="post">
-            {% if tasks %}
             <select name="task">
               {% for t in tasks %}
                 <option value="{{ t.0 }}">{{ t.0 }} (Priority {{ t.1 }})</option>
@@ -99,9 +97,6 @@
             <input type="number" name="priority" min="1" placeholder="New priority" required />
 
             <button type="submit">Update Priority</button>
-            {% else %}
-              <p class="empty-task">No tasks available to update. Add a task to change its priority.</p>
-            {% endif %}
           </form>
         </section>
       </main>
