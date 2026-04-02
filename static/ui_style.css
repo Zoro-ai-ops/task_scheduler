@@ -75,6 +75,10 @@ button:hover {
   background: #750707;
 }
 
+.delete-btn {
+  background: #b42318;
+}
+
 .next-task .task-title {
   margin: 0 0 0.35rem;
   font-weight: 700;

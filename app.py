@@ -48,6 +48,14 @@ def change():
     return redirect("/")
 
 
+@app.route("/delete", methods=["POST"])
+def delete():
+    task = request.form["task"]
+    scheduler.delete_task(task)
+
+    return redirect("/")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
