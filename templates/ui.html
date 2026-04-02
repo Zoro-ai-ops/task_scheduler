@@ -69,19 +69,17 @@
       </section>
 
       {# YET TO IMPLEMENT CHANGE FUNCTIONALITY #}
-      <section class="card">
+      <section class="card update-priority-section">
         <h2>Change Task Priority</h2>
-        <form class="grid-form" action="#" method="post">
-          <label>
-            Select Task<select name="selected_task">
-              <option>Review invoices</option>
-              <option>Backup files</option>
-            </select>
-          </label>
+        <form class="grid-form" action="/change" method="post">
+          <select name="task">
+            {% for t in tasks %}
+              <option value="{{ t.0 }}">{{ t.0 }} (Priority {{ t.1 }})</option>
+            {% endfor %}
+          </select>
+          <input type="number" name="priority" min="1" placeholder="New priority" required />
 
-          <label>New Priority<input type="number" name="new_priority" min="1" placeholder="1" /></label>
-
-          <button type="button">Update Priority</button>
+          <button type="submit">Update Priority</button>
         </form>
       </section>
     </main>
