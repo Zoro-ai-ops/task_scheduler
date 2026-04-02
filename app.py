@@ -6,24 +6,43 @@ app = Flask(__name__)
 
 scheduler = TaskScheduler()
 
-@app.route("/")
-def home():
+
+def render_home(error_message=None):
     tasks = scheduler.get_all_tasks()
     next_task = scheduler.peek_task()
     execution_preview = build_execution_preview(tasks)
 
-    return render_template("ui.html", tasks=tasks, next_task=next_task, execution_preview=execution_preview)
+    return (
+        render_template(
+            "ui.html",
+            tasks=tasks,
+            next_task=next_task,
+            execution_preview=execution_preview,
+            error_message=error_message,
+        ))
+
+@app.route("/")
+def home():
+    return render_home()
 
 
 @app.route("/add", methods=["POST"])
 def add():
-    task = request.form["task_name"].strip()
-    priority = request.form["priority"].strip()
+    task = request.form.get("task_name", "").strip()
+    priority_raw = request.form.get("priority", "").strip()
 
-    if not task or not priority:
-        return render_template("ui.html", error_message="Both task name and priority are required!")
+    if not task or not priority_raw:
+        return render_home("Both task name and priority are required!")
 
-    scheduler.add_task(task, int(priority))
+    try:
+        priority = int(priority_raw)
+    except ValueError:
+        return render_home("Priority must be a valid number.")
+
+    if priority < 1:
+        return render_home("Priority must be at least 1.")
+
+    scheduler.add_task(task, priority)
     return redirect("/")
     
 
